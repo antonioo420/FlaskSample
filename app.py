@@ -10,14 +10,14 @@ socketio = SocketIO(app, cors_allowed_origins="*", namespace="/")
     
 @app.route('/')
 def mostrar_informacion():
-    data = 'Hola'
-    print(data)
-    socketio.emit('event', data)    
     return render_template('index.html')
 
 @socketio.on('connect')
 def handle_connect():
     print('Cliente conectado')
+    data = 'Hola desde el servidor'
+    print(data)
+    socketio.emit('event', data)    
 
 if __name__ == '__main__':    
     socketio.run(app, debug=True)
